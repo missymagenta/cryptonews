@@ -10,7 +10,7 @@ def home(request):
 
     # grab crypto news
     api_request = requests.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
-    api = json.loads(api_request.content)
+    api = json.loads(api_request.content.decode('utf-8'))
     return render(request, 'home.html', {'api': api, 'price':price})
 
 
@@ -22,7 +22,7 @@ def prices(request):
         quote = quote.upper()
         crypto_request = requests.get(
             "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + quote + "&tsyms=EUR")
-        crypto = json.loads(crypto_request.content)
+        crypto = json.loads(crypto_request.content.decode('utf-8'))
         return render(request, 'prices.html', {'quote': quote, 'crypto': crypto})
 
 
